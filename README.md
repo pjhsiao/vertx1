@@ -1,5 +1,6 @@
-vertx1
-mvn command..
->>mvn clean compile package 
-start process command..
->>java -jar vertx-fat.jar
+
+mvn command<br/>
+mvn clean compile package <br/> 
+
+start process command<br/>
+java -jar vertx-fat.jar
