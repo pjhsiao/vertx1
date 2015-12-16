@@ -27,28 +27,28 @@ public class TransferRespIText extends AbstractVerticle  {
 		HttpServer server = vertx.createHttpServer();
 		Buffer buff = Buffer.buffer();
 		server.requestHandler(request -> {
-											try {
-												ByteArrayOutputStream baos = new ByteArrayOutputStream();
-											 	Document document = new Document();
-										        PdfWriter.getInstance(document, baos);
-										        document.open();
-										        Font f = new Font(FontFamily.TIMES_ROMAN, 25.0f, Font.BOLD, BaseColor.YELLOW);
-										        Chunk c = new Chunk("Hello World, First iText with Vert.x", f);
-										        c.setBackground(BaseColor.RED);
-										        Paragraph p = new Paragraph(c);
-										        document.add(p);
-										        document.close();
-										        baos.flush();
-										        buff.appendBytes(baos.toByteArray());
-												request.response().setChunked(true);
-												request.response().putHeader("Content-Type","application/pdf");
-												request.response().write(buff);
-												request.response().close();
-												baos.close();
-											} catch (Exception e) {
-												e.printStackTrace();
-											}
-								});
+				try {
+					ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				 	Document document = new Document();
+				    PdfWriter.getInstance(document, baos);
+				    document.open();
+				    Font f = new Font(FontFamily.TIMES_ROMAN, 25.0f, Font.BOLD, BaseColor.YELLOW);
+				    Chunk c = new Chunk("Hello World, First iText with Vert.x", f);
+					c.setBackground(BaseColor.RED);
+					Paragraph p = new Paragraph(c);
+					document.add(p);
+					document.close();
+					baos.flush();
+					buff.appendBytes(baos.toByteArray());
+					request.response().setChunked(true);
+					request.response().putHeader("Content-Type","application/pdf");
+					request.response().write(buff);
+					request.response().close();
+					baos.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			});
 		server.listen(8080);
 		
 	}
